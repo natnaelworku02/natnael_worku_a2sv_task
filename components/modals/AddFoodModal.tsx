@@ -51,6 +51,14 @@ export default function AddFoodModal({ isOpen, onClose, onSuccess }: AddFoodModa
       newErrors.restaurant_logo = "Restaurant Logo URL is required"
     }
 
+    if (!["Open Now", "Closed"].includes(formData.status)) {
+      newErrors.restaurant_status = "Restaurant Status must be 'Open Now' or 'Closed'"
+    }
+
+    if (!formData.price.trim() || isNaN(Number(formData.price))) {
+      newErrors.price = "Price must be a number"
+    }
+
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
@@ -64,6 +72,7 @@ export default function AddFoodModal({ isOpen, onClose, onSuccess }: AddFoodModa
       await createFood({
         ...formData,
         rating: Number(formData.rating),
+        price: Number(formData.price),
       }).unwrap()
 
       setFormData({
@@ -186,14 +195,21 @@ export default function AddFoodModal({ isOpen, onClose, onSuccess }: AddFoodModa
           </div>
 
           <div>
+            <p className="text-sm text-gray-500 mb-2">Price</p>
             <Input
               id="price"
               name="price"
-              placeholder="Price (e.g., $12.99)"
+              type="number"
+              placeholder="Enter price"
               value={formData.price}
               onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-              className="bg-gray-100 border-0 rounded-lg py-4 px-4 text-gray-700 placeholder-gray-500"
+              className="bg-gray-100 border-0 rounded-lg py-4 px-4 text-gray-800 font-medium"
             />
+            {errors.price && (
+              <p id="price-error" className="text-red-500 text-sm mt-1">
+                {errors.price}
+              </p>
+            )}
           </div>
 
           <div className="flex space-x-4 pt-6">

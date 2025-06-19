@@ -38,7 +38,7 @@ export default function EditFoodModal({ isOpen, onClose, food, onSuccess }: Edit
         restaurant: food.restaurant,
         logo: food.logo,
         status: food.status,
-        price: food.price,
+        price: food.price.toString(),
       })
     }
   }, [food])
@@ -70,6 +70,10 @@ export default function EditFoodModal({ isOpen, onClose, food, onSuccess }: Edit
       newErrors.restaurant_status = "Restaurant Status must be 'Open Now' or 'Closed'"
     }
 
+    if (!formData.price.trim() || isNaN(Number(formData.price))) {
+      newErrors.price = "Price must be a number"
+    }
+
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
@@ -85,6 +89,7 @@ export default function EditFoodModal({ isOpen, onClose, food, onSuccess }: Edit
         food: {
           ...formData,
           rating: Number(formData.rating),
+          price: Number(formData.price),
         },
       }).unwrap()
 
@@ -191,6 +196,24 @@ export default function EditFoodModal({ isOpen, onClose, food, onSuccess }: Edit
                 <SelectItem value="Closed">close</SelectItem>
               </SelectContent>
             </Select>
+          </div>
+
+          <div>
+            <p className="text-sm text-gray-500 mb-2">Price</p>
+            <Input
+              id="price"
+              name="price"
+              type="number"
+              placeholder="Enter price"
+              value={formData.price}
+              onChange={(e) => setFormData({ ...formData, price: e.target.value })}
+              className="bg-gray-100 border-0 rounded-lg py-4 px-4 text-gray-800 font-medium"
+            />
+            {errors.price && (
+              <p id="price-error" className="text-red-500 text-sm mt-1">
+                {errors.price}
+              </p>
+            )}
           </div>
 
           <div className="flex space-x-4 pt-6">
