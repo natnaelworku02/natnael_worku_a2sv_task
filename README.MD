@@ -5,6 +5,8 @@ Welcome to the **Restaurant Finder Application**, a cutting-edge web application
 
 This project was crafted as part of a job application to demonstrate my expertise in frontend development, backend integration, and state management using contemporary technologies.
 
+Visit the site [here](https://natnael-worku-a2sv-task-4oesj1moi.vercel.app/).
+
 ---
 
 ## Tech Stack
@@ -151,3 +153,4 @@ Contributions are welcome! Please fork the repository and submit a pull request 
 
 ## License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
