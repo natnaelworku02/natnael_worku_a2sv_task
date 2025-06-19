@@ -5,7 +5,7 @@ Welcome to the **Restaurant Finder Application**, a cutting-edge web application
 
 This project was crafted as part of a job application to demonstrate my expertise in frontend development, backend integration, and state management using contemporary technologies.
 
-Visit the site [here](https://natnael-worku-a2sv-task-4oesj1moi.vercel.app/).
+Visit the site [here](https://natnael-worku-a2sv-task-dahq.vercel.app/).
 
 ---
 
