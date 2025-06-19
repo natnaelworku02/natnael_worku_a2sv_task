@@ -30,7 +30,7 @@ export default function FoodCard({ food, onEdit, onDelete }: FoodCardProps) {
           className="w-full h-48 object-cover"
         />
         <div className="absolute top-3 left-3 bg-orange-500 text-white px-2 py-1 rounded text-sm font-medium">
-          <span className="restaurant-price">${food.price}</span>
+          <span className="restaurant-price">${food.price || "12.99"}</span>
         </div>
         <div className="absolute top-3 right-3">
           <DropdownMenu>
@@ -54,6 +54,17 @@ export default function FoodCard({ food, onEdit, onDelete }: FoodCardProps) {
       </div>
 
       <div className="p-4">
+        <div className="flex items-start justify-between mb-2">
+          <div className="flex items-center space-x-2">
+            <img
+              src={food.logo || "/placeholder.svg?height=24&width=24"}
+              alt={food.restaurant}
+              className="w-6 h-6 rounded"
+            />
+            <span className="text-sm text-gray-600">{food.restaurant}</span>
+          </div>
+        </div>
+
         <h3 className="restaurant-name font-semibold text-gray-900 mb-2">{food.name}</h3>
 
         <div className="flex items-center space-x-1 mb-3">
