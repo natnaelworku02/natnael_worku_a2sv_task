@@ -26,19 +26,19 @@ export default function EditFoodModal({ isOpen, onClose, food, onSuccess }: Edit
     restaurant: "",
     logo: "",
     status: "Open Now" as "Open Now" | "Closed",
-    price: "",
+    price: "", // Changed to string
   })
 
   useEffect(() => {
     if (food) {
       setFormData({
-        name: food.name,
-        rating: food.rating.toString(),
-        image: food.image,
-        restaurant: food.restaurant,
-        logo: food.logo,
-        status: food.status,
-        price: food.price.toString(),
+        name: food.name || "",
+        rating: food.rating?.toString() || "",
+        image: food.image || "",
+        restaurant: food.restaurant || "",
+        logo: food.logo || "",
+        status: food.status || "Open Now",
+        price: food.price?.toString() || "", // Ensure price is set as a string
       })
     }
   }, [food])
@@ -89,7 +89,7 @@ export default function EditFoodModal({ isOpen, onClose, food, onSuccess }: Edit
         food: {
           ...formData,
           rating: Number(formData.rating),
-          price: Number(formData.price),
+          price: formData.price, // Keep price as a string
         },
       }).unwrap()
 
@@ -106,7 +106,7 @@ export default function EditFoodModal({ isOpen, onClose, food, onSuccess }: Edit
     onClose()
   }
 
-  if (!food) return null
+  if (!food) return null // Ensure modal doesn't render if food is null
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -117,103 +117,96 @@ export default function EditFoodModal({ isOpen, onClose, food, onSuccess }: Edit
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <p className="text-sm text-gray-500 mb-2">Food name</p>
             <Input
               id="food_name"
               name="food_name"
+              placeholder="Food name"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="bg-gray-100 border-0 rounded-lg py-4 px-4 text-gray-800 font-medium"
+              className="bg-gray-100 border-0 rounded-lg py-4 px-4 text-gray-700 placeholder-gray-500"
             />
-            {errors.food_name && (
-              <p id="food-name-error" className="text-red-500 text-sm mt-1">
-                {errors.food_name}
-              </p>
-            )}
-            <p className="text-sm text-red-400 mt-2">Food name is required</p>
+            {errors.food_name && <p id="food-name-error" className="text-red-500 text-sm">{errors.food_name}</p>}
           </div>
 
           <div>
-            <p className="text-sm text-gray-500 mb-2">Food rating</p>
             <Input
               id="food_rating"
               name="food_rating"
               type="number"
+              placeholder="Food rating"
               min="0"
               max="5"
               step="0.1"
               value={formData.rating}
               onChange={(e) => setFormData({ ...formData, rating: e.target.value })}
-              className="bg-gray-100 border-0 rounded-lg py-4 px-4 text-gray-800 font-medium"
+              className="bg-gray-100 border-0 rounded-lg py-4 px-4 text-gray-700 placeholder-gray-500"
             />
+            {errors.food_rating && <p id="food-rating-error" className="text-red-500 text-sm">{errors.food_rating}</p>}
           </div>
 
           <div>
-            <p className="text-sm text-gray-500 mb-2">Food image (link)</p>
             <Input
               id="food_image"
               name="food_image"
+              placeholder="Food image (link)"
               value={formData.image}
               onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-              className="bg-gray-100 border-0 rounded-lg py-4 px-4 text-gray-800 font-medium"
+              className="bg-gray-100 border-0 rounded-lg py-4 px-4 text-gray-700 placeholder-gray-500"
             />
+            {errors.food_image && <p id="food-image-error" className="text-red-500 text-sm">{errors.food_image}</p>}
           </div>
 
           <div>
-            <p className="text-sm text-gray-500 mb-2">Restaurant name</p>
             <Input
               id="restaurant_name"
               name="restaurant_name"
+              placeholder="Restaurant name"
               value={formData.restaurant}
               onChange={(e) => setFormData({ ...formData, restaurant: e.target.value })}
-              className="bg-gray-100 border-0 rounded-lg py-4 px-4 text-gray-800 font-medium"
+              className="bg-gray-100 border-0 rounded-lg py-4 px-4 text-gray-700 placeholder-gray-500"
             />
+            {errors.restaurant_name && <p id="restaurant-name-error" className="text-red-500 text-sm">{errors.restaurant_name}</p>}
           </div>
 
           <div>
-            <p className="text-sm text-gray-500 mb-2">Restaurant logo (link)</p>
             <Input
               id="restaurant_logo"
               name="restaurant_logo"
+              placeholder="Restaurant logo (link)"
               value={formData.logo}
               onChange={(e) => setFormData({ ...formData, logo: e.target.value })}
-              className="bg-gray-100 border-0 rounded-lg py-4 px-4 text-gray-800 font-medium"
+              className="bg-gray-100 border-0 rounded-lg py-4 px-4 text-gray-700 placeholder-gray-500"
             />
+            {errors.restaurant_logo && <p id="restaurant-logo-error" className="text-red-500 text-sm">{errors.restaurant_logo}</p>}
           </div>
 
           <div>
-            <p className="text-sm text-gray-500 mb-2">Restaurant status (open/close)</p>
             <Select
               name="restaurant_status"
               value={formData.status}
               onValueChange={(value: "Open Now" | "Closed") => setFormData({ ...formData, status: value })}
             >
-              <SelectTrigger className="bg-gray-100 border-0 rounded-lg py-4 px-4 text-gray-800 font-medium">
-                <SelectValue />
+              <SelectTrigger className="bg-gray-100 border-0 rounded-lg py-4 px-4 text-gray-500">
+                <SelectValue placeholder="Restaurant status (open/close)" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="Open Now">open</SelectItem>
-                <SelectItem value="Closed">close</SelectItem>
+                <SelectItem value="Open Now">Open Now</SelectItem>
+                <SelectItem value="Closed">Closed</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
           <div>
-            <p className="text-sm text-gray-500 mb-2">Price</p>
             <Input
               id="price"
               name="price"
-              type="number"
+              type="text"
               placeholder="Enter price"
               value={formData.price}
               onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-              className="bg-gray-100 border-0 rounded-lg py-4 px-4 text-gray-800 font-medium"
+              className="bg-gray-100 border-0 rounded-lg py-4 px-4 text-gray-700 placeholder-gray-500"
             />
-            {errors.price && (
-              <p id="price-error" className="text-red-500 text-sm mt-1">
-                {errors.price}
-              </p>
-            )}
+            {errors.price && <p id="price-error" className="text-red-500 text-sm">{errors.price}</p>}
           </div>
 
           <div className="flex space-x-4 pt-6">

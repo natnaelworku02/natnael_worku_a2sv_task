@@ -25,7 +25,7 @@ export default function AddFoodModal({ isOpen, onClose, onSuccess }: AddFoodModa
     restaurant: "",
     logo: "",
     status: "Open Now" as "Open Now" | "Closed",
-    price: "",
+    price: "", // Changed to string
   })
 
   const validateForm = () => {
@@ -72,7 +72,7 @@ export default function AddFoodModal({ isOpen, onClose, onSuccess }: AddFoodModa
       await createFood({
         ...formData,
         rating: Number(formData.rating),
-        price: Number(formData.price),
+        price: formData.price, // Keep price as a string
       }).unwrap()
 
       setFormData({
@@ -199,7 +199,7 @@ export default function AddFoodModal({ isOpen, onClose, onSuccess }: AddFoodModa
             <Input
               id="price"
               name="price"
-              type="number"
+              type="text" // Changed to text
               placeholder="Enter price"
               value={formData.price}
               onChange={(e) => setFormData({ ...formData, price: e.target.value })}
