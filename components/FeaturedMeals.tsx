@@ -13,7 +13,6 @@ interface FeaturedMealsProps {
 
 export default function FeaturedMeals({ searchQuery, onEditFood, onDeleteFood }: FeaturedMealsProps) {
   const [displayedItems, setDisplayedItems] = useState(8)
-
   const { data: allFoods, isLoading: isLoadingAll } = useGetFoodsQuery()
   const { data: searchResults, isLoading: isSearching } = useSearchFoodsQuery(searchQuery, {
     skip: !searchQuery.trim(),
