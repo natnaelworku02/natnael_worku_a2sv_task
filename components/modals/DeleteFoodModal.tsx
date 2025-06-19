@@ -43,6 +43,7 @@ export default function DeleteFoodModal({ isOpen, onClose, food, onSuccess }: De
 
         <div className="flex space-x-4">
           <Button
+            id="delete-food-button"
             onClick={handleDelete}
             disabled={isLoading}
             className="flex-1 bg-orange-500 hover:bg-orange-600 text-white py-4 rounded-xl font-semibold text-lg border-0"
@@ -50,6 +51,7 @@ export default function DeleteFoodModal({ isOpen, onClose, food, onSuccess }: De
             {isLoading ? "Deleting..." : "Yes"}
           </Button>
           <Button
+            id="cancel-delete-button"
             variant="outline"
             onClick={onClose}
             className="flex-1 bg-white border-2 border-orange-500 text-orange-500 hover:bg-orange-50 py-4 rounded-xl font-semibold text-lg"

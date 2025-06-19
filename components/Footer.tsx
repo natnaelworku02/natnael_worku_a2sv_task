@@ -102,7 +102,14 @@ export default function Footer() {
                   placeholder="Enter Your email"
                   className="email-input rounded-r-none bg-gray-800 border-gray-700 text-white placeholder-gray-400"
                 />
-                <Button className="rounded-l-none bg-orange-500 hover:bg-orange-600">Subscribe</Button>
+                <Button
+                  className="px-6 py-3 font-medium text-white rounded-lg"
+                  style={{
+                    background: "linear-gradient(97.86deg, #FFBA26 -8.95%, #FF9A0E 109.24%)",
+                  }}
+                >
+                  Subscribe
+                </Button>
               </div>
             </div>
           </div>

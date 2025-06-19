@@ -22,7 +22,7 @@ export default function FoodCard({ food, onEdit, onDelete }: FoodCardProps) {
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+    <article className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
       <div className="relative">
         <img
           src={food.avatar || "/placeholder.svg?height=200&width=300"}
@@ -30,7 +30,7 @@ export default function FoodCard({ food, onEdit, onDelete }: FoodCardProps) {
           className="w-full h-48 object-cover"
         />
         <div className="absolute top-3 left-3 bg-orange-500 text-white px-2 py-1 rounded text-sm font-medium">
-          {food.price || "$12.99"}
+          <span className="restaurant-price">${food.price}</span>
         </div>
         <div className="absolute top-3 right-3">
           <DropdownMenu>
@@ -54,17 +54,6 @@ export default function FoodCard({ food, onEdit, onDelete }: FoodCardProps) {
       </div>
 
       <div className="p-4">
-        <div className="flex items-start justify-between mb-2">
-          <div className="flex items-center space-x-2">
-            <img
-              src={food.logo || "/placeholder.svg?height=24&width=24"}
-              alt={food.restaurant}
-              className="w-6 h-6 rounded"
-            />
-            <span className="text-sm text-gray-600">{food.restaurant}</span>
-          </div>
-        </div>
-
         <h3 className="restaurant-name font-semibold text-gray-900 mb-2">{food.name}</h3>
 
         <div className="flex items-center space-x-1 mb-3">
@@ -75,13 +64,13 @@ export default function FoodCard({ food, onEdit, onDelete }: FoodCardProps) {
         <div className="restaurant-status">
           <span
             className={`inline-block px-2 py-1 rounded-full text-xs font-medium ${
-              food.open === true ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"
+              food.open ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"
             }`}
           >
-            {food.open === true ? "Open" : "Closed"} 
+            {food.open ? "Open Now" : "Closed"}
           </span>
         </div>
       </div>
-    </div>
+    </article>
   )
 }

@@ -51,10 +51,6 @@ export default function AddFoodModal({ isOpen, onClose, onSuccess }: AddFoodModa
       newErrors.restaurant_logo = "Restaurant Logo URL is required"
     }
 
-    if (!["Open Now", "Closed"].includes(formData.status)) {
-      newErrors.restaurant_status = "Restaurant Status must be 'Open Now' or 'Closed'"
-    }
-
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
@@ -118,7 +114,7 @@ export default function AddFoodModal({ isOpen, onClose, onSuccess }: AddFoodModa
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               className="bg-gray-100 border-0 rounded-lg py-4 px-4 text-gray-700 placeholder-gray-500"
             />
-            <p className="text-sm text-red-400 mt-2">Food name is required</p>
+            {errors.food_name && <p id="food-name-error" className="text-red-500 text-sm">{errors.food_name}</p>}
           </div>
 
           <div>
@@ -134,6 +130,7 @@ export default function AddFoodModal({ isOpen, onClose, onSuccess }: AddFoodModa
               onChange={(e) => setFormData({ ...formData, rating: e.target.value })}
               className="bg-gray-100 border-0 rounded-lg py-4 px-4 text-gray-700 placeholder-gray-500"
             />
+            {errors.food_rating && <p id="food-rating-error" className="text-red-500 text-sm">{errors.food_rating}</p>}
           </div>
 
           <div>
@@ -145,6 +142,7 @@ export default function AddFoodModal({ isOpen, onClose, onSuccess }: AddFoodModa
               onChange={(e) => setFormData({ ...formData, image: e.target.value })}
               className="bg-gray-100 border-0 rounded-lg py-4 px-4 text-gray-700 placeholder-gray-500"
             />
+            {errors.food_image && <p id="food-image-error" className="text-red-500 text-sm">{errors.food_image}</p>}
           </div>
 
           <div>
@@ -156,6 +154,7 @@ export default function AddFoodModal({ isOpen, onClose, onSuccess }: AddFoodModa
               onChange={(e) => setFormData({ ...formData, restaurant: e.target.value })}
               className="bg-gray-100 border-0 rounded-lg py-4 px-4 text-gray-700 placeholder-gray-500"
             />
+            {errors.restaurant_name && <p id="restaurant-name-error" className="text-red-500 text-sm">{errors.restaurant_name}</p>}
           </div>
 
           <div>
@@ -167,6 +166,7 @@ export default function AddFoodModal({ isOpen, onClose, onSuccess }: AddFoodModa
               onChange={(e) => setFormData({ ...formData, logo: e.target.value })}
               className="bg-gray-100 border-0 rounded-lg py-4 px-4 text-gray-700 placeholder-gray-500"
             />
+            {errors.restaurant_logo && <p id="restaurant-logo-error" className="text-red-500 text-sm">{errors.restaurant_logo}</p>}
           </div>
 
           <div>

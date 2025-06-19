@@ -7,6 +7,10 @@ interface HeaderProps {
 }
 
 export default function Header({ onAddMeal }: HeaderProps) {
+  const handleAddMeal = () => {
+    onAddMeal()
+  }
+
   return (
     <header className="bg-white shadow-sm px-4 py-4 lg:px-8">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -16,10 +20,13 @@ export default function Header({ onAddMeal }: HeaderProps) {
         </div>
 
         <Button
-          onClick={onAddMeal}
-          className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg font-medium"
+          onClick={handleAddMeal}
+          className="px-6 py-3 font-medium text-white rounded-lg"
+          style={{
+            background: "linear-gradient(97.86deg, #FFBA26 -8.95%, #FF9A0E 109.24%)",
+          }}
         >
-          Add Meal
+          Add Meals
         </Button>
       </div>
     </header>
